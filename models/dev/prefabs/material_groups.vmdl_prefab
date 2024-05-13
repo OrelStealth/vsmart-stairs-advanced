@@ -1,0 +1,41 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:modeldoc35:version{b00eeed0-971d-4307-a91e-31e46956e894} -->
+{
+	rootNode = 
+	{
+		_class = "RootNode"
+		children = 
+		[
+			{
+				_class = "MaterialGroupList"
+				children = 
+				[
+					{
+						_class = "MaterialGroup"
+						name = "grid"
+						remaps = 
+						[
+							{
+								from = "dev/helper/testgrid.vmat"
+								to = "materials/dev/placeholder.vmat"
+							},
+						]
+					},
+					{
+						_class = "MaterialGroup"
+						name = "reflectivity_30b"
+						remaps = 
+						[
+							{
+								from = "dev/helper/testgrid.vmat"
+								to = "materials/dev/reflectivity_30b.vmat"
+							},
+						]
+					},
+				]
+			},
+		]
+		model_archetype = ""
+		primary_associated_entity = ""
+		anim_graph_name = ""
+	}
+}
