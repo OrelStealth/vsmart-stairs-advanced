@@ -11,4 +11,6 @@ Default stairs smart prop "test_steps.vsmart" lacks some of basic features that 
 1. Clockwise rotation: default prop can rotate only counterclockkwise which is the actual reason of creating this prop
 2. Styles: you can now select exact faces you'd like to see
 3. Additional materials: you can pick grid or reflectivity30b texture for better visual blocking
-4. Tweaked sliders for step width and step height
+4. Clipping: adds additional mesh with clip tool texture(This will be removed on smart prop collapse. Also works not so well on curved stairs)
+5. Downstairs option
+6. Tweaked sliders for step width and step height
