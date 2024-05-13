@@ -7,7 +7,7 @@
 3. Profit
 
 # What's difference from default stairs smart prop?
-Default stairs smart prop "test_steps.vsmart" lacks soem of basic features that I tried to fix. Here's list of new features:
+Default stairs smart prop "test_steps.vsmart" lacks some of basic features that I tried to fix. Here's list of new features:
 1. Clockwise rotation: default prop can rotate only counterclockkwise which is the actual reason of creating this prop
 2. Styles: you can now select exact faces you'd like to see
 3. Additional materials: you can pick grid or reflectivity30b texture for better visual blocking
