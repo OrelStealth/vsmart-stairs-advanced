@@ -22,12 +22,12 @@
 				]
 			},
 			{
-				_class = "MaterialGroupList"
+				_class = "PrefabList"
 				children = 
 				[
 					{
 						_class = "Prefab"
-						target_file = "models/dev/prefabs/material_groups.vmdl_prefab"
+						target_file = "models/dev/prefabs/box.vmdl_prefab"
 					},
 				]
 			},

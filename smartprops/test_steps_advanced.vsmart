@@ -14,6 +14,13 @@
             m_DisplayName = "Stairs style (1=Top faces, 2=Right side, 3=Left side, 4=Both sides, 5=Box)"
         },
 		{
+			_class = "CSmartPropVariable_Bool"
+			m_VariableName = "Downstairs"
+			m_DefaultValue = false
+			m_bExposeAsParameter = true
+			m_ParameterName = "Downstairs"
+		},
+		{
             _class = "CSmartPropVariable_MaterialGroup"
             m_sModelName = resource_name:"models/dev/placeholder_box.vmdl"
             m_DefaultValue = "grid"
@@ -79,6 +86,13 @@
 			m_bExposeAsParameter = true
 			m_ParameterName = "Clockwise rotation"
 		},
+		{
+			_class = "CSmartPropVariable_Bool"
+			m_VariableName = "Clip_Style"
+			m_DefaultValue = true
+			m_bExposeAsParameter = true
+			m_ParameterName = "Clipping (Might not work well on curved stairs | Disappears on collapse)"
+		},
 		
 		{
 			_class = "CSmartPropVariable_Float"
@@ -88,6 +102,10 @@
 		{
 			_class = "CSmartPropVariable_Float"
 			m_VariableName = "clockWise_int"
+		},
+		{
+			_class = "CSmartPropVariable_Float"
+			m_VariableName = "downstairs_int"
 		},
 		
 		{
@@ -149,6 +167,14 @@
 					}
 					m_VariableName = "clockWise_int"
 				},
+				{
+					_class = "CSmartPropOperation_SetVariableFloat"
+					m_VariableValue = 
+					{
+						m_Expression = "Downstairs ? -1 : 1"
+					}
+					m_VariableName = "downstairs_int"
+				},
 				
 				{
 					_class = "CSmartPropOperation_SetVariableFloat"
@@ -179,7 +205,6 @@
 			]
 			m_Children = 
 			[
-				
 				{
 					_class = "CSmartPropElement_Model"
 					m_nElementID = 1
@@ -233,7 +258,7 @@
 								[
 									0.000000,
 									{
-										m_Expression = "InstanceIndex() * stepAngle"
+										m_Expression = "InstanceIndex() * stepAngle * downstairs_int"
 									},
 									0.000000,
 								]
@@ -248,7 +273,7 @@
 								[
 									
 									{
-										m_Expression = "InstanceIndex() * stepOffset"
+										m_Expression = "!Downstairs ? InstanceIndex() * stepOffset : InstanceIndex() * -stepOffset - stepDepth"
 									},
 									
 									{
@@ -256,7 +281,111 @@
 									},
 									
 									{
-										m_Expression = "InstanceIndex() * stepHeight"
+										m_Expression = "!Downstairs ? InstanceIndex() * stepHeight * downstairs_int : InstanceIndex() * stepHeight * downstairs_int - stepHeight"
+									},
+								]
+							}
+							m_bEnabled = true
+						},
+						{
+							_class = "CSmartPropOperation_Rotate"
+							m_vRotation = 
+							{
+								m_Components = 
+								[
+									0.000000,
+									{
+										m_Expression = "RandomFloat( -15 * Irregularity, 15 * Irregularity )"
+									},
+									0.000000,
+								]
+							}
+							m_bEnabled = true
+						},
+					]
+				},
+				{
+					_class = "CSmartPropElement_Model"
+					m_nElementID = 1
+					m_sModelName = resource_name:"models/dev/placeholder_box_step_clip.vmdl"
+					m_vModelScale = 
+					{
+						m_Components = 
+						[
+							
+							{
+								m_Expression = "stepDepth * 0.1"
+							},
+							
+							{
+								m_Expression = "stepWidth * 0.1"
+							},
+							
+							{
+								m_Expression = "stepHeight * 0.1"
+							},
+						]
+					}
+					m_Modifiers = 
+					[
+						{
+							_class = "CSmartPropFilter_VariableValue"
+							m_VariableComparison = 
+							{
+								m_Name = "Clip_Style"
+								m_Value = true
+								m_Comparison = "EQUAL"
+							}
+						},
+						{
+							_class = "CSmartPropOperation_Translate"
+							m_vPosition = 
+							{
+								m_Components = 
+								[
+									{
+										m_Expression = "stepDepth * 0.5"
+									},
+									{
+										m_Expression = "radius"
+									},
+									0.000000,
+								]
+							}
+							m_bEnabled = true
+						},
+						{
+							_class = "CSmartPropOperation_Rotate"
+							m_vRotation = 
+							{
+								m_Components = 
+								[
+									0.000000,
+									{
+										m_Expression = "InstanceIndex() * stepAngle * downstairs_int"
+									},
+									0.000000,
+								]
+							}
+							m_bEnabled = true
+						},
+						{
+							_class = "CSmartPropOperation_Translate"
+							m_vPosition = 
+							{
+								m_Components = 
+								[
+									
+									{
+										m_Expression = "!Downstairs ? InstanceIndex() * stepOffset : InstanceIndex() * -stepOffset - stepDepth"
+									},
+									
+									{
+										m_Expression = "-radius"
+									},
+									
+									{
+										m_Expression = "!Downstairs ? InstanceIndex() * stepHeight * downstairs_int : InstanceIndex() * stepHeight * downstairs_int - stepHeight"
 									},
 								]
 							}
@@ -317,6 +446,14 @@
 					}
 					m_VariableName = "clockWise_int"
 				},
+				{
+					_class = "CSmartPropOperation_SetVariableFloat"
+					m_VariableValue = 
+					{
+						m_Expression = "Downstairs ? -1 : 1"
+					}
+					m_VariableName = "downstairs_int"
+				},
 				
 				{
 					_class = "CSmartPropOperation_SetVariableFloat"
@@ -347,7 +484,6 @@
 			]
 			m_Children = 
 			[
-				
 				{
 					_class = "CSmartPropElement_Model"
 					m_nElementID = 1
@@ -401,7 +537,7 @@
 								[
 									0.000000,
 									{
-										m_Expression = "InstanceIndex() * stepAngle"
+										m_Expression = "InstanceIndex() * stepAngle * downstairs_int"
 									},
 									0.000000,
 								]
@@ -416,7 +552,7 @@
 								[
 									
 									{
-										m_Expression = "InstanceIndex() * stepOffset"
+										m_Expression = "!Downstairs ? InstanceIndex() * stepOffset : InstanceIndex() * -stepOffset - stepDepth"
 									},
 									
 									{
@@ -424,7 +560,111 @@
 									},
 									
 									{
-										m_Expression = "InstanceIndex() * stepHeight"
+										m_Expression = "!Downstairs ? InstanceIndex() * stepHeight * downstairs_int : InstanceIndex() * stepHeight * downstairs_int - stepHeight"
+									},
+								]
+							}
+							m_bEnabled = true
+						},
+						{
+							_class = "CSmartPropOperation_Rotate"
+							m_vRotation = 
+							{
+								m_Components = 
+								[
+									0.000000,
+									{
+										m_Expression = "RandomFloat( -15 * Irregularity, 15 * Irregularity )"
+									},
+									0.000000,
+								]
+							}
+							m_bEnabled = true
+						},
+					]
+				},
+				{
+					_class = "CSmartPropElement_Model"
+					m_nElementID = 1
+					m_sModelName = resource_name:"models/dev/placeholder_box_step_clip.vmdl"
+					m_vModelScale = 
+					{
+						m_Components = 
+						[
+							
+							{
+								m_Expression = "stepDepth * 0.1"
+							},
+							
+							{
+								m_Expression = "stepWidth * 0.1"
+							},
+							
+							{
+								m_Expression = "stepHeight * 0.1"
+							},
+						]
+					}
+					m_Modifiers = 
+					[
+						{
+							_class = "CSmartPropFilter_VariableValue"
+							m_VariableComparison = 
+							{
+								m_Name = "Clip_Style"
+								m_Value = true
+								m_Comparison = "EQUAL"
+							}
+						},
+						{
+							_class = "CSmartPropOperation_Translate"
+							m_vPosition = 
+							{
+								m_Components = 
+								[
+									{
+										m_Expression = "stepDepth * 0.5"
+									},
+									{
+										m_Expression = "radius"
+									},
+									0.000000,
+								]
+							}
+							m_bEnabled = true
+						},
+						{
+							_class = "CSmartPropOperation_Rotate"
+							m_vRotation = 
+							{
+								m_Components = 
+								[
+									0.000000,
+									{
+										m_Expression = "InstanceIndex() * stepAngle * downstairs_int"
+									},
+									0.000000,
+								]
+							}
+							m_bEnabled = true
+						},
+						{
+							_class = "CSmartPropOperation_Translate"
+							m_vPosition = 
+							{
+								m_Components = 
+								[
+									
+									{
+										m_Expression = "!Downstairs ? InstanceIndex() * stepOffset : InstanceIndex() * -stepOffset - stepDepth"
+									},
+									
+									{
+										m_Expression = "-radius"
+									},
+									
+									{
+										m_Expression = "!Downstairs ? InstanceIndex() * stepHeight * downstairs_int : InstanceIndex() * stepHeight * downstairs_int - stepHeight"
 									},
 								]
 							}
@@ -485,6 +725,14 @@
 					}
 					m_VariableName = "clockWise_int"
 				},
+				{
+					_class = "CSmartPropOperation_SetVariableFloat"
+					m_VariableValue = 
+					{
+						m_Expression = "Downstairs ? -1 : 1"
+					}
+					m_VariableName = "downstairs_int"
+				},
 				
 				{
 					_class = "CSmartPropOperation_SetVariableFloat"
@@ -515,7 +763,6 @@
 			]
 			m_Children = 
 			[
-				
 				{
 					_class = "CSmartPropElement_Model"
 					m_nElementID = 1
@@ -569,7 +816,7 @@
 								[
 									0.000000,
 									{
-										m_Expression = "InstanceIndex() * stepAngle"
+										m_Expression = "InstanceIndex() * stepAngle * downstairs_int"
 									},
 									0.000000,
 								]
@@ -584,7 +831,7 @@
 								[
 									
 									{
-										m_Expression = "InstanceIndex() * stepOffset"
+										m_Expression = "!Downstairs ? InstanceIndex() * stepOffset : InstanceIndex() * -stepOffset - stepDepth"
 									},
 									
 									{
@@ -592,7 +839,111 @@
 									},
 									
 									{
-										m_Expression = "InstanceIndex() * stepHeight"
+										m_Expression = "!Downstairs ? InstanceIndex() * stepHeight * downstairs_int : InstanceIndex() * stepHeight * downstairs_int - stepHeight"
+									},
+								]
+							}
+							m_bEnabled = true
+						},
+						{
+							_class = "CSmartPropOperation_Rotate"
+							m_vRotation = 
+							{
+								m_Components = 
+								[
+									0.000000,
+									{
+										m_Expression = "RandomFloat( -15 * Irregularity, 15 * Irregularity )"
+									},
+									0.000000,
+								]
+							}
+							m_bEnabled = true
+						},
+					]
+				},
+				{
+					_class = "CSmartPropElement_Model"
+					m_nElementID = 1
+					m_sModelName = resource_name:"models/dev/placeholder_box_step_clip.vmdl"
+					m_vModelScale = 
+					{
+						m_Components = 
+						[
+							
+							{
+								m_Expression = "stepDepth * 0.1"
+							},
+							
+							{
+								m_Expression = "stepWidth * 0.1"
+							},
+							
+							{
+								m_Expression = "stepHeight * 0.1"
+							},
+						]
+					}
+					m_Modifiers = 
+					[
+						{
+							_class = "CSmartPropFilter_VariableValue"
+							m_VariableComparison = 
+							{
+								m_Name = "Clip_Style"
+								m_Value = true
+								m_Comparison = "EQUAL"
+							}
+						},
+						{
+							_class = "CSmartPropOperation_Translate"
+							m_vPosition = 
+							{
+								m_Components = 
+								[
+									{
+										m_Expression = "stepDepth * 0.5"
+									},
+									{
+										m_Expression = "radius"
+									},
+									0.000000,
+								]
+							}
+							m_bEnabled = true
+						},
+						{
+							_class = "CSmartPropOperation_Rotate"
+							m_vRotation = 
+							{
+								m_Components = 
+								[
+									0.000000,
+									{
+										m_Expression = "InstanceIndex() * stepAngle * downstairs_int"
+									},
+									0.000000,
+								]
+							}
+							m_bEnabled = true
+						},
+						{
+							_class = "CSmartPropOperation_Translate"
+							m_vPosition = 
+							{
+								m_Components = 
+								[
+									
+									{
+										m_Expression = "!Downstairs ? InstanceIndex() * stepOffset : InstanceIndex() * -stepOffset - stepDepth"
+									},
+									
+									{
+										m_Expression = "-radius"
+									},
+									
+									{
+										m_Expression = "!Downstairs ? InstanceIndex() * stepHeight * downstairs_int : InstanceIndex() * stepHeight * downstairs_int - stepHeight"
 									},
 								]
 							}
@@ -653,6 +1004,14 @@
 					}
 					m_VariableName = "clockWise_int"
 				},
+				{
+					_class = "CSmartPropOperation_SetVariableFloat"
+					m_VariableValue = 
+					{
+						m_Expression = "Downstairs ? -1 : 1"
+					}
+					m_VariableName = "downstairs_int"
+				},
 				
 				{
 					_class = "CSmartPropOperation_SetVariableFloat"
@@ -683,7 +1042,6 @@
 			]
 			m_Children = 
 			[
-				
 				{
 					_class = "CSmartPropElement_Model"
 					m_nElementID = 1
@@ -737,7 +1095,7 @@
 								[
 									0.000000,
 									{
-										m_Expression = "InstanceIndex() * stepAngle"
+										m_Expression = "InstanceIndex() * stepAngle * downstairs_int"
 									},
 									0.000000,
 								]
@@ -752,7 +1110,7 @@
 								[
 									
 									{
-										m_Expression = "InstanceIndex() * stepOffset"
+										m_Expression = "!Downstairs ? InstanceIndex() * stepOffset : InstanceIndex() * -stepOffset - stepDepth"
 									},
 									
 									{
@@ -760,7 +1118,111 @@
 									},
 									
 									{
-										m_Expression = "InstanceIndex() * stepHeight"
+										m_Expression = "!Downstairs ? InstanceIndex() * stepHeight * downstairs_int : InstanceIndex() * stepHeight * downstairs_int - stepHeight"
+									},
+								]
+							}
+							m_bEnabled = true
+						},
+						{
+							_class = "CSmartPropOperation_Rotate"
+							m_vRotation = 
+							{
+								m_Components = 
+								[
+									0.000000,
+									{
+										m_Expression = "RandomFloat( -15 * Irregularity, 15 * Irregularity )"
+									},
+									0.000000,
+								]
+							}
+							m_bEnabled = true
+						},
+					]
+				},
+				{
+					_class = "CSmartPropElement_Model"
+					m_nElementID = 1
+					m_sModelName = resource_name:"models/dev/placeholder_box_step_clip.vmdl"
+					m_vModelScale = 
+					{
+						m_Components = 
+						[
+							
+							{
+								m_Expression = "stepDepth * 0.1"
+							},
+							
+							{
+								m_Expression = "stepWidth * 0.1"
+							},
+							
+							{
+								m_Expression = "stepHeight * 0.1"
+							},
+						]
+					}
+					m_Modifiers = 
+					[
+						{
+							_class = "CSmartPropFilter_VariableValue"
+							m_VariableComparison = 
+							{
+								m_Name = "Clip_Style"
+								m_Value = true
+								m_Comparison = "EQUAL"
+							}
+						},
+						{
+							_class = "CSmartPropOperation_Translate"
+							m_vPosition = 
+							{
+								m_Components = 
+								[
+									{
+										m_Expression = "stepDepth * 0.5"
+									},
+									{
+										m_Expression = "radius"
+									},
+									0.000000,
+								]
+							}
+							m_bEnabled = true
+						},
+						{
+							_class = "CSmartPropOperation_Rotate"
+							m_vRotation = 
+							{
+								m_Components = 
+								[
+									0.000000,
+									{
+										m_Expression = "InstanceIndex() * stepAngle * downstairs_int"
+									},
+									0.000000,
+								]
+							}
+							m_bEnabled = true
+						},
+						{
+							_class = "CSmartPropOperation_Translate"
+							m_vPosition = 
+							{
+								m_Components = 
+								[
+									
+									{
+										m_Expression = "!Downstairs ? InstanceIndex() * stepOffset : InstanceIndex() * -stepOffset - stepDepth"
+									},
+									
+									{
+										m_Expression = "-radius"
+									},
+									
+									{
+										m_Expression = "!Downstairs ? InstanceIndex() * stepHeight * downstairs_int : InstanceIndex() * stepHeight * downstairs_int - stepHeight"
 									},
 								]
 							}
@@ -821,6 +1283,14 @@
 					}
 					m_VariableName = "clockWise_int"
 				},
+				{
+					_class = "CSmartPropOperation_SetVariableFloat"
+					m_VariableValue = 
+					{
+						m_Expression = "Downstairs ? -1 : 1"
+					}
+					m_VariableName = "downstairs_int"
+				},
 				
 				{
 					_class = "CSmartPropOperation_SetVariableFloat"
@@ -851,7 +1321,6 @@
 			]
 			m_Children = 
 			[
-				
 				{
 					_class = "CSmartPropElement_Model"
 					m_nElementID = 1
@@ -905,7 +1374,7 @@
 								[
 									0.000000,
 									{
-										m_Expression = "InstanceIndex() * stepAngle"
+										m_Expression = "InstanceIndex() * stepAngle * downstairs_int"
 									},
 									0.000000,
 								]
@@ -920,7 +1389,7 @@
 								[
 									
 									{
-										m_Expression = "InstanceIndex() * stepOffset"
+										m_Expression = "!Downstairs ? InstanceIndex() * stepOffset : InstanceIndex() * -stepOffset - stepDepth"
 									},
 									
 									{
@@ -928,7 +1397,111 @@
 									},
 									
 									{
-										m_Expression = "InstanceIndex() * stepHeight"
+										m_Expression = "!Downstairs ? InstanceIndex() * stepHeight * downstairs_int : InstanceIndex() * stepHeight * downstairs_int - stepHeight"
+									},
+								]
+							}
+							m_bEnabled = true
+						},
+						{
+							_class = "CSmartPropOperation_Rotate"
+							m_vRotation = 
+							{
+								m_Components = 
+								[
+									0.000000,
+									{
+										m_Expression = "RandomFloat( -15 * Irregularity, 15 * Irregularity )"
+									},
+									0.000000,
+								]
+							}
+							m_bEnabled = true
+						},
+					]
+				},
+				{
+					_class = "CSmartPropElement_Model"
+					m_nElementID = 1
+					m_sModelName = resource_name:"models/dev/placeholder_box_step_clip.vmdl"
+					m_vModelScale = 
+					{
+						m_Components = 
+						[
+							
+							{
+								m_Expression = "stepDepth * 0.1"
+							},
+							
+							{
+								m_Expression = "stepWidth * 0.1"
+							},
+							
+							{
+								m_Expression = "stepHeight * 0.1"
+							},
+						]
+					}
+					m_Modifiers = 
+					[
+						{
+							_class = "CSmartPropFilter_VariableValue"
+							m_VariableComparison = 
+							{
+								m_Name = "Clip_Style"
+								m_Value = true
+								m_Comparison = "EQUAL"
+							}
+						},
+						{
+							_class = "CSmartPropOperation_Translate"
+							m_vPosition = 
+							{
+								m_Components = 
+								[
+									{
+										m_Expression = "stepDepth * 0.5"
+									},
+									{
+										m_Expression = "radius"
+									},
+									0.000000,
+								]
+							}
+							m_bEnabled = true
+						},
+						{
+							_class = "CSmartPropOperation_Rotate"
+							m_vRotation = 
+							{
+								m_Components = 
+								[
+									0.000000,
+									{
+										m_Expression = "InstanceIndex() * stepAngle * downstairs_int"
+									},
+									0.000000,
+								]
+							}
+							m_bEnabled = true
+						},
+						{
+							_class = "CSmartPropOperation_Translate"
+							m_vPosition = 
+							{
+								m_Components = 
+								[
+									
+									{
+										m_Expression = "!Downstairs ? InstanceIndex() * stepOffset : InstanceIndex() * -stepOffset - stepDepth"
+									},
+									
+									{
+										m_Expression = "-radius"
+									},
+									
+									{
+										m_Expression = "!Downstairs ? InstanceIndex() * stepHeight * downstairs_int : InstanceIndex() * stepHeight * downstairs_int - stepHeight"
 									},
 								]
 							}
