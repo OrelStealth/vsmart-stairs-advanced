@@ -15,4 +15,5 @@ Default stairs smart prop "test_steps.vsmart" lacks some of basic features that 
 3. Additional materials: you can pick grid or reflectivity30b texture for better visual blocking
 4. Clipping: adds additional mesh with clip tool texture (This will be removed on smart prop collapse. Also works not so well on curved stairs)
 5. Downstairs option
-6. Tweaked sliders for step width and step height
+6. Choose from 9 different surface properties, which might be useful for blocking levels with specific surface step sounds
+7. Tweaked sliders for step width and step height
