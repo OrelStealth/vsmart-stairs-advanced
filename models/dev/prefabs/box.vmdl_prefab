@@ -31,6 +31,28 @@
 							},
 						]
 					},
+					{
+						_class = "MaterialGroup"
+						name = "dev_checkers"
+						remaps = 
+						[
+							{
+								from = "dev/helper/testgrid.vmat"
+								to = "materials/dev/dev_texture_checkers.vmat"
+							},
+						]
+					},
+					{
+						_class = "MaterialGroup"
+						name = "dev_square"
+						remaps = 
+						[
+							{
+								from = "dev/helper/testgrid.vmat"
+								to = "materials/dev/dev_texture_square.vmat"
+							},
+						]
+					},
 				]
 			},
 			{
@@ -44,7 +66,7 @@
 						collision_prop = "default"
 						origin = [ 0.0, 0.0, 5.0 ]
 						angles = [ 0.0, 0.0, 0.0 ]
-						dimensions = [ 10.0, 10.0, 10.0 ]
+						dimensions = [ 9.9, 9.9, 9.9 ]
 					},
 				]
 				leave_body_collision_unmodified = false
