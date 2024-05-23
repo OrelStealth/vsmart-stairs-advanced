@@ -2,7 +2,7 @@
  Advanced stairs smart prop for Source 2 Hammer
 
 # How to use
-1. Download zip archive from latest [release page](https://github.com/OrelStealth/vsmart-stairs-advanced/releases)
+1. Download zip latest archive of compiled version from [release page](https://github.com/OrelStealth/vsmart-stairs-advanced/releases)
 2. Unpack to your addon. Ex.: /game/csgo_addons/de_map_name/
 3. Find "test_steps_advanced.vsmart" in asset browser now. Drag and drop into your map.
 
