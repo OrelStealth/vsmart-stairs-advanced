@@ -1,4 +1,4 @@
-# vsmart-stairs-advanced
+# Stairs advanced CS2 smartprop
  Advanced stairs smart prop for Source 2 Hammer
 
 # How to use
